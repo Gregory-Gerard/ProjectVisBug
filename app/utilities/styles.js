@@ -43,7 +43,7 @@ export const getStyles = el => {
 
     vettedStyles.push({
       prop: 'borderWidth',
-      value: borderWidth,
+      value: `${Number(parseFloat(borderWidth) * window.devicePixelRatio).toPrecision(1)}px`,
     })
   }
 
