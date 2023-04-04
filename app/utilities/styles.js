@@ -6,7 +6,7 @@ export const getStyle = (el, name) => {
     name = name.toLowerCase()
     let s = document.defaultView.getComputedStyle(el, '')
     return s && s.getPropertyValue(name)
-  } 
+  }
 }
 
 export const getStyles = el => {
@@ -30,7 +30,7 @@ export const getStyles = el => {
 
   const { borderColor, borderWidth, borderStyle } = borders
 
-  if (parseInt(borderWidth) > 0) {
+  if (parseFloat(borderWidth) > 0) {
     vettedStyles.push({
       prop: 'borderColor',
       value: borderColor,
@@ -107,7 +107,7 @@ export const findNearestParentElement = el => {
 export const findNearestChildElement = el => {
   if (el.shadowRoot && el.shadowRoot.children.length) {
     return [...el.shadowRoot.children]
-      .filter(({nodeName}) => 
+      .filter(({nodeName}) =>
         !['LINK','STYLE','SCRIPT','HTML','HEAD'].includes(nodeName)
       )[0]
   }
@@ -120,7 +120,7 @@ export const loadStyles = async stylesheets => {
   const texts   = await Promise.all(fetches.map(url => url.text()))
   const style   = document.createElement('style')
 
-  style.textContent = texts.reduce((styles, fileContents) => 
+  style.textContent = texts.reduce((styles, fileContents) =>
     styles + fileContents
   , '')
 
@@ -156,8 +156,8 @@ export const firstUsableFontFromFamily = family => {
 
       context.font = `12px ${fontName}, sans-serif`
 
-      return baselineSize !== context.measureText('font-test').width 
-        ? fontName 
+      return baselineSize !== context.measureText('font-test').width
+        ? fontName
         : false
   }).filter(value => value !== false)[0]
 
